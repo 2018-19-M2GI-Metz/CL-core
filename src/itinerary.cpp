@@ -10,7 +10,7 @@
 
 double Itinerary::getLenght() {
     double length = 0;
-    vector<Segment> segments = this->getSegments();
+    vector<Segment> segments = getSegments();
     for (int i = 0; i < segments.size(); i++) {
         length += segments[i].getLenght();
     }
@@ -18,13 +18,17 @@ double Itinerary::getLenght() {
 }
 
 long Itinerary::segmentCount() {
-    return this->getSegments().size();
+    return getSegments().size();
 }
 
 vector<double> Itinerary::getStart() {
-    return this->getSegments()[0].getStart();
+    return getSegments()[0].getStart();
 }
 
 vector<double> Itinerary::getEnd() {
-    return this->getSegments()[this->segmentCount() - 1].getEnd();
+    return getSegments()[this->segmentCount() - 1].getEnd();
+}
+
+vector<Segment> Itinerary::getSegments() {
+    return vector<Segment> {};
 }

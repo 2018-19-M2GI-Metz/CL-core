@@ -6,14 +6,16 @@
 //  Copyright © 2018 Thomas Lemaire. All rights reserved.
 //
 
+// --------------------------------------------------
+// interface files define entry points of the library
+// --------------------------------------------------
+
 
 #include "interface.hpp"
 
 
 
-// --------------------------------------------------
-// interface files define entry points of the library
-// --------------------------------------------------
+
 
 
 

@@ -10,11 +10,14 @@
 #define interface_hpp
 
 #include <stdio.h>
+#include <vector>
 
 
 // --------------------------------------------------
 // interface files define entry points of the library
 // --------------------------------------------------
+
+
 
 
 #endif /* interface_hpp */
