@@ -6,7 +6,9 @@
 //  Copyright © 2018 Thomas Lemaire. All rights reserved.
 //
 
-#include "itinerary.hpp"
+#include "Itinerary.hpp"
+
+using std::vector;
 
 double Itinerary::getLenght() {
     double length = 0;

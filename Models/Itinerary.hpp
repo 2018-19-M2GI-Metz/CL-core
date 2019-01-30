@@ -6,22 +6,18 @@
 //  Copyright © 2018 Thomas Lemaire. All rights reserved.
 //
 
-#ifndef itinerary_hpp
-#define itinerary_hpp
+#pragma once
 
 #include <stdio.h>
-#include <vector>
 
-#include "segment.hpp"
+#include "Segment.hpp"
 
-class Itinerary {
+class Itinerary : public Model {
     void init();
 public:
     double getLenght();
     long segmentCount();
-    vector<Segment> getSegments();
-    vector<double> getStart();
-    vector<double> getEnd();
+    std::vector<Segment> getSegments();
+    std::vector<double> getStart();
+    std::vector<double> getEnd();
 };
-
-#endif /* itinerary_hpp */

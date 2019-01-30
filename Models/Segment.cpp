@@ -6,7 +6,9 @@
 //  Copyright © 2018 Thomas Lemaire. All rights reserved.
 //
 
-#include "segment.hpp"
+#include "Segment.hpp"
+
+using std::vector;
 
 double Segment::getLenght() {
     return 0;

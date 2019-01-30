@@ -6,21 +6,19 @@
 //  Copyright © 2018 Thomas Lemaire. All rights reserved.
 //
 
-#ifndef segment_hpp
-#define segment_hpp
+#pragma once
 
 #include <stdio.h>
 #include <vector>
+#include "Model.hpp"
 
-using namespace std;
-
-class Segment {
+class Segment : public Model {
     void init();
 public:
     double getLenght();
-    vector<double> getStart();
-    vector<double> getEnd();
+    std::vector<double> getStart();
+    std::vector<double> getEnd();
+    void save();
 };
 
-#endif /* segment_hpp */
 
