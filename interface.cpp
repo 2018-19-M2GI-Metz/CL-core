@@ -13,7 +13,21 @@
 
 #include "interface.hpp"
 
-
+//std::vector<Point> searchPlace(std::string naturalQuery) {
+//    
+//}
+//
+//Path searchFastest(Point start, Point end) {
+//    
+//}
+//
+//Path searchShortest(Point start, Point end) {
+//    
+//}
+//
+//Path searchNearestPlace(double latitude, double longitude) {
+//    
+//}
 
 
 

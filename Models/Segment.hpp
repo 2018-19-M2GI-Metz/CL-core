@@ -11,14 +11,18 @@
 #include <stdio.h>
 #include <vector>
 #include "Model.hpp"
+#include "Point.hpp"
 
 class Segment : public Model {
-    void init();
+private:
+    int id;
+    double lenght;
+    int startPointId;
+    int endPointId;
 public:
     double getLenght();
-    std::vector<double> getStart();
-    std::vector<double> getEnd();
-    void save();
+    Point* start();
+    Point* end();
 };
 
 

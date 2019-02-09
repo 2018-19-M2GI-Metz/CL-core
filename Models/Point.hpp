@@ -12,6 +12,16 @@
 #include "Model.hpp"
 
 class Point : public Model {
-    
+private:
+    int id;
+    std::string name;
+    std::string address;
+    double latitude;
+    double longitude;
+public:
+    std::string getName();
+    std::string getAddress();
+    double getLatitude();
+    double getLongitude();
 };
 

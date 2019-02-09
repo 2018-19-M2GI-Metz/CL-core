@@ -11,15 +11,13 @@
 using std::vector;
 
 double Segment::getLenght() {
-    return 0;
+    return this->lenght;
 }
 
-vector<double> Segment::getStart() {
-    vector<double> vector {0, 0};
-    return vector;
+Point* Segment::start() {
+    return nullptr;
 }
 
-vector<double> Segment::getEnd() {
-    vector<double> vector {0, 0};
-    return vector;
+Point* Segment::end() {
+    return nullptr;
 }

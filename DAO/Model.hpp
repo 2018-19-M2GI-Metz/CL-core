@@ -16,7 +16,7 @@ public:
     //Model(int nx);
     //std::string tableName;
     //std::vector<std::string> fields;
-    virtual void save();
-    virtual void remove();
+    //virtual void save();
+    //virtual void remove();
 };
 

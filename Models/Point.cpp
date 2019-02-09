@@ -7,3 +7,19 @@
 //
 
 #include "Point.hpp"
+
+std::string Point::getName() {
+    return this->name;
+}
+
+std::string Point::getAddress() {
+    return this->address;
+}
+
+double Point::getLatitude() {
+    return this->latitude;
+}
+
+double Point::getLongitude() {
+    return this->longitude;
+}
