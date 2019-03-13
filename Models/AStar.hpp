@@ -34,6 +34,10 @@ public:
 		}
 		return false;
 	}
+	
+	 static bool isValid(Point* p) {
+		return ( p->getLongitude() > -1 && p->getLatitude() > -1);
+	    }
 
 	static double calculateH(Point* dep, Point* dest) {
 		double H = (sqrt((dep->getLongitude() - dest->getLongitude())*(dep->getLongitude() - dest->getLongitude())
@@ -47,14 +51,25 @@ public:
 		if (isDestination(dep, dest) == true){
 			return res;//il est vide
 		}
-
+		
+		bool solution_found = false;
 		/*
-		while(ouverts)
-		{
-			Point* point = on dépile ouverts;
+		while(!ouverts.empty()){
+		
+			Point* courant = on dépile ouverts;
 			état du point FERME
-			if (isDestination(point, dest) == true){
-				return point;
+			if (isDestination(courant, dest) == true){
+				solution_found = true;
+				break;
+			}
+			//calcul du nouveau coût
+			
+			for (!voisins.empty()){
+			
+				if (isDestination(voisins[i], dest) == true){
+					solution_found = true;
+					break;
+				}
 			}
 
 		}
