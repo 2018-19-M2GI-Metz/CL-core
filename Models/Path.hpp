@@ -20,7 +20,7 @@ public:
     double getLenght();
     long segmentCount();
     bool isShortest();
-    bool isLastest();
+    bool isFastest();
     std::vector<Segment> getSegments();
     std::vector<Point> getPoints(); // referenced points
     std::vector<PathPoint> getPathPoints(); // indexed points
