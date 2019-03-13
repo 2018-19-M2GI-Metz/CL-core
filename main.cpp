@@ -13,6 +13,14 @@ using std::cout;
 
 int main(int argc, char** argv) {
     DB::load();
+    
+    // DB usage example
+    rows rows = DB::execute("SELECT * FROM point");
+    for(row row : rows) {
+        for(std::string value : row) {
+            cout << value << std::endl;
+        }
+    }
     return 0;
 }
 

@@ -12,10 +12,6 @@
 #include "PathPoint.hpp"
 
 class Path : public Model {
-private:
-    int id;
-    bool shortest;
-    bool fastest;
 public:
     double getLenght();
     long segmentCount();
@@ -24,4 +20,9 @@ public:
     std::vector<Segment> getSegments();
     std::vector<Point> getPoints(); // referenced points
     std::vector<PathPoint> getPathPoints(); // indexed points
+private:
+    int id;
+    bool shortest;
+    bool fastest;
+    std::string tableName = "path";
 };

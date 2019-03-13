@@ -12,12 +12,23 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <string>
 #include <sqlite3.h>
 
+typedef std::vector<std::vector<std::string>> rows;
+typedef std::vector<std::string> row;
+
 class DB {
 public:
+    // return vector of rows represented by vector of string
+    // row 0 is column names
+    static rows execute(std::string query);
+    
+    // load the full database
     static void load();
+    
+    // close the database
     static void close();
 private:
     DB();

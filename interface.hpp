@@ -16,8 +16,8 @@
 // interface files define entry points of the library
 // --------------------------------------------------
 
-std::vector<Point> searchPlace(std::string naturalQuery);
-Path searchFastest(Point start, Point end);
-Path searchShortest(Point start, Point end);
-Path searchNearestPlace(double latitude, double longitude);
+std::vector<std::unique_ptr<Point>> searchPlace(std::string naturalQuery);
+std::unique_ptr<Path> searchFastest(long startPointId, long endPointId);
+std::unique_ptr<Path> searchShortest(long startPointId, long endPointId);
+std::unique_ptr<Path> searchNearestPlace(double latitude, double longitude);
 

@@ -12,10 +12,10 @@
 #include <string>
 
 class Model {
-public:
-    //Model(int nx);
-    //std::string tableName;
+private:
+    std::string tableName;
     //std::vector<std::string> fields;
+public:
     //virtual void save();
     //virtual void remove();
 };

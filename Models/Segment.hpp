@@ -14,15 +14,17 @@
 #include "Point.hpp"
 
 class Segment : public Model {
+public:
+    double getLenght();
+    Point* start();
+    Point* end();
 private:
     int id;
     double lenght;
     int startPointId;
     int endPointId;
-public:
-    double getLenght();
-    Point* start();
-    Point* end();
+    std::string tableName = "segment";
+
 };
 
 

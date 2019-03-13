@@ -23,3 +23,7 @@ double Point::getLatitude() {
 double Point::getLongitude() {
     return this->longitude;
 }
+
+void save () {
+
+}
