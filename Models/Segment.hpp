@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <vector>
-#include "Model.hpp"
+#include "../DAO/Model.hpp"
 #include "Point.hpp"
 
 class Segment : public Model {

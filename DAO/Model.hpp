@@ -10,7 +10,7 @@
 
 #include <vector>
 #include <string>
-#include "DB.hpp"
+#include "../Interfaces/DB.hpp"
 
 class Model {
 public:
