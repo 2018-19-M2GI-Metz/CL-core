@@ -15,14 +15,18 @@
 
 class Segment : public Model {
 public:
-    double getLenght();
-    Point* start();
-    Point* end();
+    Segment(int id, int startPointId, int endPointId, int distance, int time);
+    static Segment from(row row);
+    
+    double getDistance();
+    Point* startPoint();
+    Point* endPoint();
 private:
     int id;
-    double lenght;
     int startPointId;
     int endPointId;
+    int distance;
+    int time;
     std::string tableName = "segment";
 
 };

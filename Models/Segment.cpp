@@ -10,14 +10,26 @@
 
 using std::vector;
 
-double Segment::getLenght() {
-    return this->lenght;
+Segment::Segment(int id, int startPointId, int endPointId, int distance, int time) {
+    this->id = id;
+    this->startPointId = startPointId;
+    this->endPointId = endPointId;
+    this->distance = distance;
+    this->time = time;
 }
 
-Point* Segment::start() {
+Segment Segment::from(row row) {
+    return Segment(atoi(row.at(0).c_str()), atoi(row.at(1).c_str()), atoi(row.at(2).c_str()), atoi(row.at(3).c_str()), atoi(row.at(4).c_str()));
+}
+
+double Segment::getDistance() {
+    return this->distance;
+}
+
+Point* Segment::startPoint() {
     return nullptr;
 }
 
-Point* Segment::end() {
+Point* Segment::endPoint() {
     return nullptr;
 }

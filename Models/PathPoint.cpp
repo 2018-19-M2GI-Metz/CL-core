@@ -7,3 +7,14 @@
 //
 
 #include "PathPoint.hpp"
+
+PathPoint::PathPoint(int id, int pathId, int pointId, int index) {
+    this->id = id;
+    this->pathId = pathId;
+    this->pointId = pointId;
+    this->index = index;
+}
+
+PathPoint PathPoint::from(row row) {
+    return PathPoint(atoi(row.at(0).c_str()), atoi(row.at(1).c_str()), atoi(row.at(2).c_str()), atoi(row.at(3).c_str()));
+}

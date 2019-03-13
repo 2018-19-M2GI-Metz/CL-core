@@ -13,6 +13,9 @@
 
 class Path : public Model {
 public:
+    Path(int id, bool isShortest, bool isFastest, int distance, int time);
+    static Path from(row row);
+    
     double getLenght();
     long segmentCount();
     bool isShortest();
@@ -24,5 +27,7 @@ private:
     int id;
     bool shortest;
     bool fastest;
+    int distance;
+    int time;
     std::string tableName = "path";
 };

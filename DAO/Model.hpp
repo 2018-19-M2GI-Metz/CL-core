@@ -10,13 +10,14 @@
 
 #include <vector>
 #include <string>
+#include "DB.hpp"
 
 class Model {
-private:
-    std::string tableName;
-    //std::vector<std::string> fields;
 public:
     //virtual void save();
     //virtual void remove();
+private:
+    std::string tableName;
+    //std::vector<std::string> fields;
 };
 

@@ -28,8 +28,8 @@ CREATE TABLE `segment` (
     `id` INTEGER PRIMARY KEY,
     `startPointId` INTEGER NOT NULL,
     `endPointId` INTEGER NOT NULL,
-    `distance` INTEGER NULL DEFAULT NULL, -- in meter
-    `time` INTEGER NULL DEFAULT NULL -- in second
+    `distance` INTEGER NOT NULL, -- in meter
+    `time` INTEGER NOT NULL -- in second
 );
 
 -- --------------------------------------------------------
@@ -40,9 +40,9 @@ CREATE TABLE `segment` (
 CREATE TABLE `path` (
     `id` INTEGER PRIMARY KEY,
     `isShortest` INTEGER NOT NULL,
-    `isFastest`INTEGER NOT NULL,
-    `distance` INTEGER NULL DEFAULT NULL, -- in meter
-    `time` INTEGER NULL DEFAULT NULL -- in second
+    `isFastest` INTEGER NOT NULL,
+    `distance` INTEGER NOT NULL, -- in meter
+    `time` INTEGER NOT NULL -- in second
 );
 
 -- --------------------------------------------------------

@@ -13,6 +13,9 @@
 
 class Point : public Model {
 public:
+    Point(int id, std::string name, std::string address, double latitude, double longitude);
+    static Point from(row row);
+    
     std::string getName();
     std::string getAddress();
     double getLatitude();

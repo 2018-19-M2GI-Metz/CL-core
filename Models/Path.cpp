@@ -8,11 +8,23 @@
 
 #include "Path.hpp"
 
+Path::Path(int id, bool isShortest, bool isFastest, int distance, int time) {
+    this->id = id;
+    this->shortest = isShortest;
+    this->fastest = isFastest;
+    this->distance = distance;
+    this->time = time;
+}
+
+Path Path::from(row row) {
+    return Path(atoi(row.at(0).c_str()), atoi(row.at(1).c_str()) == 1, atoi(row.at(2).c_str()) == 1, atoi(row.at(3).c_str()), atoi(row.at(4).c_str()));
+}
+
 double Path::getLenght() {
     double length = 0;
     std::vector<Segment> segments = this->getSegments();
     for (int i = 0; i < segments.size(); i++) {
-        length += segments[i].getLenght();
+        length += segments[i].getDistance();
     }
     return length;
 }
