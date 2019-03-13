@@ -21,4 +21,6 @@ We decided to go with a sqlite database.
 Sources (needed) : https://www.sqlite.org/index.html
 Documentation : https://www.tutorialspoint.com/sqlite/sqlite_c_cpp.htm
 
+If you're running `Debian` you can install the library with `sudo apt install libsqlite3-dev`
+
 

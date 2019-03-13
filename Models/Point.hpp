@@ -9,7 +9,7 @@
 #pragma once
 
 #include <stdio.h>
-#include "Model.hpp"
+#include "../DAO/Model.hpp"
 
 class Point : public Model {
 public:
