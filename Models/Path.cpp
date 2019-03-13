@@ -29,13 +29,11 @@ double Path::getLenght() {
     return length;
 }
 
-bool Path::isShortest()
-{
+bool Path::isShortest() {
 	return this->shortest;
 }
 
-bool Path::isFastest()
-{
+bool Path::isFastest() {
 	return this->fastest;
 }
 

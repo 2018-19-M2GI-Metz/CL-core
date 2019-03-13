@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include "DB.hpp"
+#include "Models/Path.hpp"
 
 using std::cout;
 
@@ -21,6 +22,8 @@ int main(int argc, char** argv) {
             cout << value << std::endl;
         }
     }
+    
+    Point point = Point(1,"test", "test", 1, 1);
     return 0;
 }
 
