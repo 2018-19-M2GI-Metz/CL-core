@@ -17,6 +17,16 @@ double Path::getLenght() {
     return length;
 }
 
+bool Path::isShortest()
+{
+	return this->shortest;
+}
+
+bool Path::isFastest()
+{
+	return this->fastest;
+}
+
 long Path::segmentCount() {
     return this->getSegments().size();
 }
