@@ -48,9 +48,16 @@ public:
 			return res;//il est vide
 		}
 
-		/*while(ouverts)
-			Point* point;
-			
+		/*
+		while(ouverts)
+		{
+			Point* point = on dépile ouverts;
+			état du point FERME
+			if (isDestination(point, dest) == true){
+				return point;
+			}
+
+		}
 		*/
 	}
 };
