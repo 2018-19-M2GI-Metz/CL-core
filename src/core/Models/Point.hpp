@@ -16,20 +16,27 @@
 #include <math.h>
 #include "../DAO/Model.hpp"
 #include <memory>
+#include <map>
+
+class Point;
+typedef std::shared_ptr<Point> sharedPoint;
 
 class Point : public Model {
 public:
-    Point(int id, std::string name, std::string address, double latitude, double longitude);
-    static std::shared_ptr<Point> from(row row);
-    static std::shared_ptr<Point> find(int id);
+    static sharedPoint from(row row);
+    static sharedPoint find(int id);
     
+    int getId();
     std::string getName();
     std::string getAddress();
     double getLatitude();
     double getLongitude();
     double distanceFrom(Point point);
-
 private:
+    Point(int id, std::string name, std::string address, double latitude, double longitude);
+
+    static std::map<int, std::weak_ptr<Point>> loadedPoints;
+
     int id;
     std::string name;
     std::string address;
