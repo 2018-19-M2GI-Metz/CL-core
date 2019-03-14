@@ -16,8 +16,14 @@ Point::Point(int id, std::string name, std::string address, double latitude, dou
     this->longitude = longitude;
 }
 
-Point Point::from(row row) {
-    return Point(atoi(row.at(0).c_str()), row.at(1), row.at(2), std::stod(row.at(3).c_str()), std::stod(row.at(4).c_str()));
+std::shared_ptr<Point> Point::from(row row) {
+    Point point = Point(atoi(row.at(0).c_str()), row.at(1), row.at(2), std::stod(row.at(3).c_str()), std::stod(row.at(4).c_str()));
+    return std::make_shared<Point>(point);
+}
+
+std::shared_ptr<Point> Point::find(int id) {
+    rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point WHERE id = ?");
+    return Point::from(rows.at(1));
 }
 
 std::string Point::getName() {
@@ -34,6 +40,16 @@ double Point::getLatitude() {
 
 double Point::getLongitude() {
     return this->longitude;
+}
+
+double Point::distanceFrom(Point point) {
+    double earthRadius = 6378000;
+    double lat_a = (PI * this->latitude) / 180;
+    double lon_a = (PI * this->longitude) / 180;
+    double lat_b = (PI * point.latitude) / 180;
+    double lon_b = (PI * point.longitude) / 180;
+    double distance = earthRadius * (PI/2 - asin(sin(lat_b) * sin(lat_a) + cos(lon_b - lon_a) * cos(lat_b) * cos(lat_a)));
+    return distance;
 }
 
 void save () {
