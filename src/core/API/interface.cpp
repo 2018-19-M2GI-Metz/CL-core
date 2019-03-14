@@ -14,12 +14,10 @@
 #include "interface.hpp"
 
 std::vector<sharedPoint> searchPlace(std::string naturalQuery) {
-    std::shared_ptr<Point> p1 = Point::find(1);
-    std::shared_ptr<Point> p2 = Point::find(2);
-    std::vector<std::shared_ptr<Point>> vector = std::vector<std::shared_ptr<Point>>();
-    vector.push_back(p1);
-    vector.push_back(p2);
-    return vector;
+    std::vector<std::string> parameters = std::vector<std::string>();
+    parameters.push_back(naturalQuery);
+    rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point WHERE name LIKE '%' || ?1 || '%' OR address LIKE ?1", parameters);
+    return Point::from(rows);
 }
 
 std::shared_ptr<Path> searchFastest(long startPointId, long endPointId) {

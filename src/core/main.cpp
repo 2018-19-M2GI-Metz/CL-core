@@ -42,8 +42,11 @@ int main(int argc, char** argv) {
 //    }
 //    cout << std::endl;
     
-    sharedPoint point = searchNearestPlace(49.083455, 6.181983);
-    std::cout << point->getName() << " " << point->getAddress();
+    std::vector<sharedPoint> points = searchPlace("onti");
+    
+    for (sharedPoint point : points) {
+        std::cout << point->getName() << " " << point->getAddress() << std::endl;
+    }
     
     
     return 0;

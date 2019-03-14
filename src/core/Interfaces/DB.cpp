@@ -103,6 +103,7 @@ rows DB::execute(std::string query, std::vector<std::string> binds) {
 
 void DB::loadInstance() {
     if (!DB::instance) {
+        
         //std::cout << "Development mode enabled, database deleted before loading.\n";
         //remove("database.db");
         
