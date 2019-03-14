@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <vector>
 #include "Models/Path.hpp"
+#include <memory>
 
 // --------------------------------------------------
 // interface files define entry points of the library

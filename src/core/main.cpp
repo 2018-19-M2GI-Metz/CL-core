@@ -7,7 +7,7 @@
 //
 
 #include <iostream>
-#include "DB.hpp"
+#include "./Interfaces/DB.hpp"
 #include "Models/Path.hpp"
 
 using std::cout;

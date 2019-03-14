@@ -7,17 +7,17 @@
 #include "../Element/GElement.h"
 
 /**
-Sommet d'un graphe en général
+Sommet d'un graphe en gï¿½nï¿½ral
 
-v est l'information associée au sommet : elle dépend de l'application du graphe
+v est l'information associï¿½e au sommet : elle dï¿½pend de l'application du graphe
 */
 template <class T>
 class Sommet : public GElement<T>
 {
 public:
-	int degre;		// Rappel : degré = nombre d'arêtes adjacentes à ce sommet
+	int degre;		// Rappel : degrï¿½ = nombre d'arï¿½tes adjacentes ï¿½ ce sommet
 	/**
-		Un sommet est toujours créé isolé (c'est-à-dire qu'il n'y a pas d'arête adjacente à ce sommet)
+		Un sommet est toujours crï¿½ï¿½ isolï¿½ (c'est-ï¿½-dire qu'il n'y a pas d'arï¿½te adjacente ï¿½ ce sommet)
 	*/
 	Sommet(const int clef, const T & v) :GElement<T>(clef, v), degre(0) {}
 
@@ -31,8 +31,8 @@ Sommet<T>::operator std::string() const
 	std::ostringstream oss;
 
 	oss << "Sommet(" << '\n';
-	oss << GElement<T>::operator string() << '\n';
-	oss << "degré = " << degre << '\n';
+	oss << GElement<T>::operator std::string() << '\n';
+	oss << "degrï¿½ = " << degre << '\n';
 	oss << ")";
 	return oss.str();
 }

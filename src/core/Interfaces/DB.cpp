@@ -7,6 +7,7 @@
 //
 
 #include "DB.hpp"
+#include <cstring>
 
 sqlite3* DB::instance;
 
@@ -19,7 +20,7 @@ rows DB::execute(std::string query) {
         bool firstRow = true;
         
         sqlite3_stmt* context = nullptr;
-        sqlite3_prepare(DB::instance, query.c_str(), int(strlen(query.c_str())), &context, &pzTest);
+        sqlite3_prepare(DB::instance, query.c_str(), int(std::strlen(query.c_str())), &context, &pzTest);
         do {
             stepStatus = sqlite3_step(context);
             if (stepStatus != SQLITE_DONE) {
