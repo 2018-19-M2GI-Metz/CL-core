@@ -14,6 +14,7 @@ using std::cout;
 
 int main(int argc, char** argv) {
     DB::load();
+    Segment::populateDB();
     
     // DB usage example :
     // bindable properties MUST start à '?1', then '?2', '?3', and so on
@@ -29,6 +30,17 @@ int main(int argc, char** argv) {
         cout << " |" << std::endl;
     }
     cout << std::endl;
+    
+    cout << std::endl;
+    rows = DB::execute("SELECT * FROM segment");
+    for(row row : rows) {
+        for(std::string value : row) {
+            cout << " | " << value;
+        }
+        cout << " |" << std::endl;
+    }
+    cout << std::endl;
+    
     
     return 0;
 }

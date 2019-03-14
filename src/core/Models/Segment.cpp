@@ -36,7 +36,6 @@ sharedSegment Segment::find(int startPointId, int endPointId) {
     return result;
 }
 
-
 double Segment::getDistance() {
     return this->distance;
 }
@@ -48,3 +47,60 @@ sharedPoint Segment::getStartPoint() {
 sharedPoint Segment::getEndPoint() {
     return Point::find(this->endPointId);
 }
+
+// ONLY FOR INSERT AT THIS TIME
+void Segment::save() {
+    std::vector<std::string> parameters = std::vector<std::string>();
+    parameters.push_back(std::to_string(this->startPointId));
+    parameters.push_back(std::to_string(this->endPointId));
+    parameters.push_back(std::to_string(this->distance));
+    parameters.push_back(std::to_string(this->time));
+    DB::execute("INSERT INTO segment (startPointId, endPointId, distance, time) VALUES (?2, ?3, ?4, ?5)", parameters);
+}
+
+void Segment::populateDB() {
+    std::vector<sharedPoint> points = Point::all();
+    int pointCount = int(points.size());
+    int startPointIndex = 0;
+    int endPointIndex = 1;
+    int segmentId = 0;
+    int connexionCountOfPoint = 0;
+    int currentPercent = 0;
+    sharedPoint startPoint = points[startPointIndex];
+    sharedPoint endPoint = points[endPointIndex];
+    
+    while (startPointIndex != pointCount - 2) {
+        
+        // Test
+        
+        int distance = int(startPoint->distanceFrom(*endPoint));
+        if (distance < 5) {
+            sharedSegment segment = std::make_shared<Segment>(Segment(segmentId, startPoint->getId(), endPoint->getId(), distance, distance));
+            segment->save();
+            segmentId += 1;
+            connexionCountOfPoint += 1;
+        }
+        
+        // Increment
+        
+        if (endPointIndex == pointCount - 1 || connexionCountOfPoint == 3) {
+            startPointIndex += 1;
+            endPointIndex = startPointIndex + 1;
+            startPoint = points[startPointIndex];
+            endPoint = points[endPointIndex];
+            
+            int percent = int(ceil(100 * ((double)startPointIndex / (double)pointCount)));
+            if (percent % 5 == 0 && percent != currentPercent) {
+                currentPercent = percent;
+                std::cout << "\r" << percent << "%";
+            }
+        }
+        else {
+            endPointIndex += 1;
+            endPoint = points[endPointIndex];
+        }
+    }
+    
+    std::cout << std::endl << "created " << segmentId << " routes";
+}
+

@@ -21,10 +21,12 @@ public:
     Segment(int id, int startPointId, int endPointId, int distance, int time);
     static sharedSegment from(row row);
     static sharedSegment find(int startPointId, int endPointId);
-
+    static void populateDB();
+    
     double getDistance();
     sharedPoint getStartPoint();
     sharedPoint getEndPoint();
+    void save();
 private:
     int id;
     int startPointId;

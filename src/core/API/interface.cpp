@@ -36,7 +36,6 @@ std::shared_ptr<Path> searchShortest(long startPointId, long endPointId) {
 std::shared_ptr<Path> searchNearestPlace(double latitude, double longitude) {
     Path p = Path(4, true, false, 1000, 1300);
     return std::make_shared<Path>(p);
-    
 }
 
 

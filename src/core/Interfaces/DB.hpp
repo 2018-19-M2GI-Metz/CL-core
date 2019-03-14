@@ -28,6 +28,9 @@ public:
     // load the full database
     static void load();
     
+    // create arbitrary datas for segments
+    static void populate();
+    
     // close the database
     static void close();
 private:
