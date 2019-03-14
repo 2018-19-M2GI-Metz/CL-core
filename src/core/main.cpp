@@ -9,6 +9,7 @@
 #include <iostream>
 #include "./Interfaces/DB.hpp"
 #include "Models/Path.hpp"
+#include "API/interface.hpp"
 
 using std::cout;
 
@@ -29,6 +30,13 @@ int main(int argc, char** argv) {
         cout << " |" << std::endl;
     }
     cout << std::endl;
+
+    auto res = searchPlace("metz");
+    
+    cout << "Printing names retrieved with searchPlace()" << std::endl;
+    for (auto const point : res) {
+        cout << point->getName() << std::endl;
+    }
     
     return 0;
 }

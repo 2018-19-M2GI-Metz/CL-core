@@ -45,7 +45,7 @@ sharedPoint Point::find(int id) {
         return point;
     }
     else {
-        rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point WHERE id = ?");
+        rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point WHERE id = ?", std::vector<std::string>({std::to_string(id)}));
         return Point::from(rows.at(1));
     }
 }
