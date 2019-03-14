@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <math.h>
 #include "../DAO/Model.hpp"
+#include <memory>
 
 class Point : public Model {
 public:
