@@ -44,7 +44,7 @@ std::vector<sharedSegment> Path::getSegments() {
     std::vector<sharedSegment> segments = std::vector<sharedSegment>();
     for (int index = 0; index < (points.size() - 1); index += 1) {
         int startPointId = points[index]->getId();
-        int endPointId = points[index]->getId();
+        int endPointId = points[index+1]->getId();
         segments.push_back(Segment::find(startPointId, endPointId));
     }
     return segments;

@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 //    }
     
 
-    sharedPath path = searchShortest(1, 20);
+    sharedPath path = searchShortest(1, 72);
 
     for (sharedSegment segment : path->getSegments()) {
         std::cout << segment->getStartPoint()->getId() << " --> " << segment->getEndPoint()->getId() << std::endl;

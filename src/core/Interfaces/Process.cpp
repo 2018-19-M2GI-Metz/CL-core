@@ -59,8 +59,10 @@ sharedPath Process::AStar(sharedPoint start, sharedPoint end) {
         while (current != start) {
             sharedPoint next = nullptr;
             for (sharedPoint potential : current->getNextPoints()) {
-                if (next == nullptr || costs[potential->getId()] < costs[next->getId()]) {
-                    next = potential;
+                if (costs.find(potential->getId()) != costs.end()) {
+                    if (next == nullptr || costs[potential->getId()] < costs[next->getId()]) {
+                        next = potential;
+                    }
                 }
             }
             points.push_back(next);
@@ -69,9 +71,9 @@ sharedPath Process::AStar(sharedPoint start, sharedPoint end) {
         
         // create a path
         
+        std::reverse(points.begin(), points.end());
         Path path = Path(true, true);
         for (sharedPoint point : points) {
-            std::cout << point->getId() << std::endl;
             path.addPoint(point);
         }
         
