@@ -23,8 +23,8 @@ class DB {
 public:
     // return vector of rows represented by vector of string
     // row 0 is column names
-    static rows execute(std::string query);
-    
+    static rows execute(std::string query, std::vector<std::string> binds = std::vector<std::string>());
+
     // load the full database
     static void load();
     

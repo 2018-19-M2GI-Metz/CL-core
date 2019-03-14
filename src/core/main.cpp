@@ -15,15 +15,21 @@ using std::cout;
 int main(int argc, char** argv) {
     DB::load();
     
-    // DB usage example
-    rows rows = DB::execute("SELECT * FROM point");
+    // DB usage example :
+    // bindable properties MUST start à '?1', then '?2', '?3', and so on
+    // bindable properties are automaticaly converted to int when necessary
+    // bindable properties are optionnals
+    
+    cout << std::endl;
+    rows rows = DB::execute("SELECT * FROM point WHERE id = ?1", std::vector<std::string>({"2"}));
     for(row row : rows) {
         for(std::string value : row) {
-            cout << value << std::endl;
+            cout << " | " << value;
         }
+        cout << " |" << std::endl;
     }
+    cout << std::endl;
     
-    Point point = Point(1,"test", "test", 1, 1);
     return 0;
 }
 

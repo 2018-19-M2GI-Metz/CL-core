@@ -23,7 +23,6 @@ private:
     int pointId;
     int index; // index in the path
     std::string tableName = "pathPoint";
-
 };
 
 

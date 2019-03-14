@@ -11,7 +11,7 @@
 
 sqlite3* DB::instance;
 
-rows DB::execute(std::string query) {
+rows DB::execute(std::string query, std::vector<std::string> binds) {
     rows result = rows();
     DB::loadInstance();
     if (DB::instance) {
@@ -19,13 +19,48 @@ rows DB::execute(std::string query) {
         const char *pzTest;
         bool firstRow = true;
         
+        // Prepare the statement
+        
         sqlite3_stmt* context = nullptr;
-        sqlite3_prepare(DB::instance, query.c_str(), int(std::strlen(query.c_str())), &context, &pzTest);
+        sqlite3_prepare(DB::instance, query.c_str(), int(strlen(query.c_str())), &context, &pzTest);
+        
+        // Binds value if needed
+        
+        int bindIndex = 1;
+        if (binds.size() != 0) {
+            for (std::string bind : binds) {
+                
+                // test if string is int
+                
+                bool isInt = true;
+                for (int i = 0; i < bind.length(); i++) {
+                    if (isdigit(bind[i]) == false) {
+                        isInt = false;
+                    }
+                }
+                
+                // apply logic
+                
+                if (isInt) {
+                    int bindInt = atoi(bind.c_str());
+                    sqlite3_bind_int(context, bindIndex, bindInt);
+                }
+                else {
+                    sqlite3_bind_text(context, bindIndex, bind.c_str(), int(strlen(bind.c_str())), SQLITE_STATIC);
+                }
+                bindIndex += 1;
+            }
+        }
+        
+        // do-while to get all rows
+        
         do {
             stepStatus = sqlite3_step(context);
             if (stepStatus != SQLITE_DONE) {
                 row rowResult = row();
                 int columnCount = sqlite3_column_count(context);
+                
+                // create the first line of the result (column names)
                 
                 if (firstRow) {
                     for (int columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
@@ -36,7 +71,9 @@ rows DB::execute(std::string query) {
                     rowResult = row();
                     firstRow = false;
                 }
-
+                
+                // foreach columns in the row
+                
                 for (int columnIndex = 0; columnIndex < columnCount; columnIndex += 1) {
                     std::string value = std::string(reinterpret_cast<const char*>(sqlite3_column_text(context, columnIndex)));
                     rowResult.push_back(value);
@@ -45,11 +82,15 @@ rows DB::execute(std::string query) {
             }
         } while(stepStatus == SQLITE_ROW);
         
+        // error catch
+        
         if (stepStatus == SQLITE_ERROR || stepStatus == SQLITE_BUSY || stepStatus == SQLITE_MISUSE) {
-            std::cout << "erreur d'execution de execute()";
+            std::cout << "\nSQL error : Erreur d'execution de execute()";
         }
+        
+        // end of query
+        
         sqlite3_finalize(context);
-        return result;
     }
     else {
         fprintf(stderr, "SQL error: Impossible de charger l'instance");
