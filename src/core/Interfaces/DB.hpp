@@ -16,6 +16,7 @@
 #include <vector>
 #include <string>
 #include <sqlite3.h>
+#include "../SQL/SQLseeder.hpp"
 
 typedef std::vector<std::vector<std::string>> rows;
 typedef std::vector<std::string> row;

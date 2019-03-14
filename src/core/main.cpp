@@ -41,13 +41,13 @@ int main(int argc, char** argv) {
 //        cout << " |" << std::endl;
 //    }
 //    cout << std::endl;
-    
+
     std::vector<sharedPoint> points = searchPlace("onti");
-    
+
     for (sharedPoint point : points) {
         std::cout << point->getName() << " " << point->getAddress() << std::endl;
     }
-    
+
     
     return 0;
 }

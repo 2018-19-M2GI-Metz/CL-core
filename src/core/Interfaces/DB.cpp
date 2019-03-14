@@ -103,10 +103,6 @@ rows DB::execute(std::string query, std::vector<std::string> binds) {
 
 void DB::loadInstance() {
     if (!DB::instance) {
-        
-        //std::cout << "Development mode enabled, database deleted before loading.\n";
-        //remove("database.db");
-        
         if (access("database.db", F_OK) != -1) {
             DB::isNewDatabase = false;
         }
@@ -118,12 +114,14 @@ void DB::loadInstance() {
 }
 
 void DB::load() {
+    std::cout << "Development mode enabled, database deleted before loading.\n";
+    remove("database.db");
+    
     DB::loadInstance();
     
     if (DB::isNewDatabase) {
         // SCHEMA
-        std::ifstream ifs = std::ifstream("rsc/schema.sql");
-        std::string query((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        std::string query = getSQLSchema();
         
         std::vector<std::string> queries;
         while (query.size()) {
@@ -143,9 +141,7 @@ void DB::load() {
         }
         
         // DATA
-        ifs = std::ifstream("rsc/data.sql");
-        query = std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-        DB::execute(query);
+        DB::execute(getSQLData());
     }
 }
 
