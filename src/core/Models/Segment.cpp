@@ -79,7 +79,7 @@ void Segment::populateDB() {
         
         int distance = int(startPoint->distanceFrom(*endPoint));
         if (distance < maxDistance) {
-            sharedSegment segment = std::make_shared<Segment>(Segment(segmentId, startPoint->getId(), endPoint->getId(), distance, distance));
+            sharedSegment segment = std::make_shared<Segment>(Segment(0, startPoint->getId(), endPoint->getId(), distance, distance));
             segment->save();
             segmentCount += 1;
             connexionCountOfPoint += 1;
