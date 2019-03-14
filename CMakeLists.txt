@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 project (Map)
 
+set(SQLite3_DIR "cmake/")
 set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin/")
 
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_SOURCE_DIR} "src/core/*.cpp")
