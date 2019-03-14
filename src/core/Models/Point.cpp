@@ -38,6 +38,18 @@ std::vector<sharedPoint> Point::from(rows rows) {
     return sharedPoints;
 }
 
+std::vector<sharedPoint> Point::all() {
+    rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point");
+    std::vector<sharedPoint> sharedPoints = std::vector<sharedPoint>();
+    bool firstRow = true;
+    for (row row : rows) {
+        if (!firstRow) {
+            sharedPoints.push_back(Point::from(row));
+        }
+        firstRow = false;
+    }
+    return sharedPoints;
+}
 
 sharedPoint Point::find(int id) {
     if (Point::loadedPoints.find(id) != Point::loadedPoints.end() && !Point::loadedPoints.at(id).expired()) {
@@ -45,7 +57,7 @@ sharedPoint Point::find(int id) {
         return point;
     }
     else {
-        rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point WHERE id = ?", std::vector<std::string>({std::to_string(id)}));
+        rows rows = DB::execute("SELECT id, name, address, latitude, longitude FROM point WHERE id = ?1", std::vector<std::string>({std::to_string(id)}));
         return Point::from(rows.at(1));
     }
 }

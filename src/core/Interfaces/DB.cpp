@@ -20,37 +20,39 @@ rows DB::execute(std::string query, std::vector<std::string> binds) {
         bool firstRow = true;
         
         // Prepare the statement
-        
         sqlite3_stmt* context = nullptr;
-        sqlite3_prepare(DB::instance, query.c_str(), int(strlen(query.c_str())), &context, &pzTest);
+        int error = sqlite3_prepare_v2(DB::instance, query.c_str(), int(strlen(query.c_str())), &context, &pzTest);
         
+        if (SQLITE_OK != error) {
+            std::cout << "ERREUR NUMERO" << error;
+        }
+                
         // Binds value if needed
         
         int bindIndex = 1;
-        if (binds.size() != 0) {
-            for (std::string bind : binds) {
-                
-                // test if string is int
-                
-                bool isInt = true;
-                for (int i = 0; i < bind.length(); i++) {
-                    if (isdigit(bind[i]) == false) {
-                        isInt = false;
-                    }
+        for (std::string bind : binds) {
+            
+            // test if string is int
+            
+            bool isInt = true;
+            for (int i = 0; i < bind.length(); i++) {
+                if (isdigit(bind[i]) == false) {
+                    isInt = false;
                 }
-                
-                // apply logic
-                
-                if (isInt) {
-                    int bindInt = atoi(bind.c_str());
-                    sqlite3_bind_int(context, bindIndex, bindInt);
-                }
-                else {
-                    sqlite3_bind_text(context, bindIndex, bind.c_str(), int(strlen(bind.c_str())), SQLITE_STATIC);
-                }
-                bindIndex += 1;
             }
+            
+            // apply logic
+            
+            if (isInt) {
+                int bindInt = atoi(bind.c_str());
+                sqlite3_bind_int(context, bindIndex, bindInt);
+            }
+            else {
+                sqlite3_bind_text(context, bindIndex, bind.c_str(), int(strlen(bind.c_str())), SQLITE_STATIC);
+            }
+            bindIndex += 1;
         }
+        
         
         // do-while to get all rows
         
@@ -114,7 +116,23 @@ void DB::load() {
     // SCHEMA
     std::ifstream ifs = std::ifstream("rsc/schema.sql");
     std::string query((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-    DB::execute(query);
+    
+    std::vector<std::string> queries;
+    while (query.size()) {
+        int index = int(query.find(";"));
+        if(index != std::string::npos){
+            queries.push_back(query.substr(0, index));
+            query = query.substr(index + 1);
+        }
+        else{
+            queries.push_back(query);
+            query = "";
+        }
+    }
+    
+    for (std::string query : queries) {
+        DB::execute(query + ";");
+    }
     
     // DATA
     ifs = std::ifstream("rsc/data.sql");
@@ -127,6 +145,7 @@ void DB::close() {
         sqlite3_close(DB::instance);
     }
 }
+
 
 
 

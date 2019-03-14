@@ -1,7 +1,3 @@
--- SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
--- SET AUTOCOMMIT = 0;
--- SET time_zone = "+00:00";
-
 -- Base de données :  `libgps`
 
 -- --------------------------------------------------------
@@ -21,7 +17,7 @@ CREATE INDEX point_name_index ON point(name);
 
 -- --------------------------------------------------------
 -- Structure de la table `segments`
--- [lecture seule]
+-- [lecture seule / écriture à l'initialisation]
 -- Les segments représentent l'ensemble des routes existantes.
 
 CREATE TABLE `segment` (
@@ -56,15 +52,3 @@ CREATE TABLE `pathPoint` (
     `pointId` INTEGER NOT NULL,
     `index` INTEGER NOT NULL
 );
-
-
-
-
-
-
-
-
-
-
-
-

@@ -25,8 +25,9 @@ class Point : public Model {
 public:
     static sharedPoint from(row row);
     static std::vector<sharedPoint> from(rows rows);
+    static std::vector<sharedPoint> all();
     static sharedPoint find(int id);
-    
+
     int getId();
     std::string getName();
     std::string getAddress();
