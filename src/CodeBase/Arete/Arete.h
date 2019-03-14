@@ -8,24 +8,24 @@
 #include "../Sommet/Sommet.h"
 
 /**
-	représente une arête d'un graphe en général.
+	reprï¿½sente une arï¿½te d'un graphe en gï¿½nï¿½ral.
 
-	Une arête est définie par un sommet-début et par un sommet-fin et par une information v.
+	Une arï¿½te est dï¿½finie par un sommet-dï¿½but et par un sommet-fin et par une information v.
 
-	On ne connaît pas la nature de v à ce niveau (v pourrait contenir une couleur, une longueur, un nom, etc.)
+	On ne connaï¿½t pas la nature de v ï¿½ ce niveau (v pourrait contenir une couleur, une longueur, un nom, etc.)
 
-	T est la nature de l'information portée par un sommet et
-	S est la nature de l'information portée par une arête
+	T est la nature de l'information portï¿½e par un sommet et
+	S est la nature de l'information portï¿½e par une arï¿½te
 */
 
 template <class S, class T>
 class Arete : public GElement<S>
 {
 public:
-	Sommet <T> *debut, *fin;	// debut et fin peuvent être interprétées comme des clefs étrangères vers une table de sommets
+	Sommet <T> *debut, *fin;	// debut et fin peuvent ï¿½tre interprï¿½tï¿½es comme des clefs ï¿½trangï¿½res vers une table de sommets
 
 	/**
-		met à jour le degré des sommets que cette nouvelle arête va connecter
+		met ï¿½ jour le degrï¿½ des sommets que cette nouvelle arï¿½te va connecter
 	*/
 	Arete(const int clef, const S & v, Sommet<T> * debut, Sommet<T> * fin) : GElement<S>(clef, v), debut(debut), fin(fin)
 	{
@@ -33,7 +33,7 @@ public:
 	}
 
 	/**
-	met à jour le degré des sommets que cette nouvelle arête va déconnecter
+	met ï¿½ jour le degrï¿½ des sommets que cette nouvelle arï¿½te va dï¿½connecter
 	*/
 	~Arete() { debut->degre--; fin->degre--; }
 
@@ -41,11 +41,11 @@ public:
 
 
 	/**
-	 * vérifie si *this s'appuie sur s1 et s2
+	 * vï¿½rifie si *this s'appuie sur s1 et s2
 	 *
 	 * DONNEES : *this, s1, s2
 	 *
-	 * RESULTATS : true si *this s'appuie sur s1 et s2 c'est-à-dire si (début == s1 et fin == s2) ou (début == s2 et fin == s1), false sinon
+	 * RESULTATS : true si *this s'appuie sur s1 et s2 c'est-ï¿½-dire si (dï¿½but == s1 et fin == s2) ou (dï¿½but == s2 et fin == s1), false sinon
 	 *
 	 * */
 	bool estEgal(const Sommet<T> * s1, const Sommet<T> * s2) const;
@@ -59,7 +59,7 @@ Arete<S, T>::operator std::string() const
 	std::ostringstream oss;
 
 	oss << "Arete  (" << endl;
-	oss << GElement<S>::operator string() << endl;
+	oss << GElement<S>::operator std::string() << endl;
 	oss << "clef debut = " << debut->clef << endl;
 	oss << "clef fin = " << fin->clef << endl;
 	oss << ")";
@@ -74,11 +74,11 @@ std::ostream & operator << (std::ostream & os, const Arete<S, T> & arete)
 }
 
 /**
- * vérifie si *this s'appuie sur s1 et s2
+ * vï¿½rifie si *this s'appuie sur s1 et s2
  *
  * DONNEES : *this, s1, s2
  *
- * RESULTATS : true si *this s'appuie sur s1 et s2 c'est-à-dire si (début == s1 et fin == s2) ou (début == s2 et fin == s1), false sinon
+ * RESULTATS : true si *this s'appuie sur s1 et s2 c'est-ï¿½-dire si (dï¿½but == s1 et fin == s2) ou (dï¿½but == s2 et fin == s1), false sinon
  *
  * */
 template <class S, class T>
