@@ -72,10 +72,10 @@ sharedPath Process::AStar(sharedPoint start, sharedPoint end) {
         Path path = Path(true, true);
         for (sharedPoint point : points) {
             std::cout << point->getId() << std::endl;
-            //path.addPoint(point);
+            path.addPoint(point);
         }
         
-        //return std::make_shared<Path>(path);
+        return std::make_shared<Path>(path);
     }
     
     return sharedPath();

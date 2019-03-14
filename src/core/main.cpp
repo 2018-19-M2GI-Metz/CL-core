@@ -35,7 +35,7 @@ int main(int argc, char** argv) {
 //    cout << std::endl;
 //
 //    cout << std::endl << "Showing all segments :" << std::endl;
-//    rows = DB::execute("SELECT * FROM segment");
+//    rows rows = DB::execute("SELECT * FROM segment");
 //    for(row row : rows) {
 //        for(std::string value : row) {
 //            cout << " | " << value;
@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 //    }
     
 
-    sharedPath path = searchShortest(1, 200);
+    sharedPath path = searchShortest(1, 20);
 
     for (sharedSegment segment : path->getSegments()) {
         std::cout << segment->getStartPoint()->getId() << " --> " << segment->getEndPoint()->getId() << std::endl;

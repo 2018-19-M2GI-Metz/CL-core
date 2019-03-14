@@ -40,7 +40,7 @@ sharedSegment Segment::find(int startPointId, int endPointId) {
     parameters.push_back(std::to_string(startPointId));
     parameters.push_back(std::to_string(endPointId));
     
-    rows rows = DB::execute("SELECT id, startPointId, endPointId, distance, time FROM semgent WHERE (startPointId = ?1 AND endPointId = ?2) OR (endPointId = ?2 AND startPointId = ?1)");
+    rows rows = DB::execute("SELECT id, startPointId, endPointId, distance, time FROM segment WHERE (startPointId = ?1 AND endPointId = ?2 ) OR (startPointId = ?2 AND endPointId = ?1 )", parameters);
     sharedSegment result = sharedSegment();
     if (rows.size() > 1) {
         result = Segment::from(rows[1]);
