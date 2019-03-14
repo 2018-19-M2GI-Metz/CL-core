@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <vector>
-#include "src/core/Models/Path.hpp"
+#include "../Models/Path.hpp"
 #include <memory>
 
 // --------------------------------------------------
