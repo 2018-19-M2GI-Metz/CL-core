@@ -24,6 +24,7 @@ typedef std::shared_ptr<Point> sharedPoint;
 class Point : public Model {
 public:
     static sharedPoint from(row row);
+    static std::vector<sharedPoint> from(rows rows);
     static sharedPoint find(int id);
     
     int getId();

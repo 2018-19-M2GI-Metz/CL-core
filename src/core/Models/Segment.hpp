@@ -13,11 +13,15 @@
 #include "../DAO/Model.hpp"
 #include "Point.hpp"
 
+class Segment;
+typedef std::shared_ptr<Segment> sharedSegment;
+
 class Segment : public Model {
 public:
     Segment(int id, int startPointId, int endPointId, int distance, int time);
-    static Segment from(row row);
-    
+    static sharedSegment from(row row);
+    static sharedSegment find(int startPointId, int endPointId);
+
     double getDistance();
     sharedPoint getStartPoint();
     sharedPoint getEndPoint();

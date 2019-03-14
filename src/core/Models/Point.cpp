@@ -26,6 +26,19 @@ std::shared_ptr<Point> Point::from(row row) {
     return shared;
 }
 
+std::vector<sharedPoint> Point::from(rows rows) {
+    std::vector<sharedPoint> sharedPoints = std::vector<sharedPoint>();
+    bool firstRow = true;
+    for (row row : rows) {
+        if (!firstRow) {
+            sharedPoints.push_back(Point::from(row));
+        }
+        firstRow = false;
+    }
+    return sharedPoints;
+}
+
+
 sharedPoint Point::find(int id) {
     if (Point::loadedPoints.find(id) != Point::loadedPoints.end() && !Point::loadedPoints.at(id).expired()) {
         sharedPoint point = Point::loadedPoints[id].lock();

@@ -20,8 +20,8 @@ public:
     long segmentCount();
     bool isShortest();
     bool isFastest();
-    std::vector<Segment> getSegments();
-    std::vector<Point> getPoints(); // referenced points
+    std::vector<sharedSegment> getSegments();
+    std::vector<sharedPoint> getPoints(); // referenced points
     std::vector<PathPoint> getPathPoints(); // indexed points
 private:
     int id;

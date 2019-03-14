@@ -17,6 +17,7 @@ class PathPoint : public Model {
 public:
     PathPoint(int id, int pathId, int pointId, int index);
     static PathPoint from(row row);
+    static std::vector<PathPoint> from(rows rows);
 private:
     int id;
     int pathId;

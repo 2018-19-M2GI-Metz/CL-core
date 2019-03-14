@@ -18,9 +18,24 @@ Segment::Segment(int id, int startPointId, int endPointId, int distance, int tim
     this->time = time;
 }
 
-Segment Segment::from(row row) {
-    return Segment(atoi(row.at(0).c_str()), atoi(row.at(1).c_str()), atoi(row.at(2).c_str()), atoi(row.at(3).c_str()), atoi(row.at(4).c_str()));
+sharedSegment Segment::from(row row) {
+    Segment segment = Segment(atoi(row.at(0).c_str()), atoi(row.at(1).c_str()), atoi(row.at(2).c_str()), atoi(row.at(3).c_str()), atoi(row.at(4).c_str()));
+    return std::make_shared<Segment>(segment);
 }
+
+sharedSegment Segment::find(int startPointId, int endPointId) {
+    std::vector<std::string> parameters = std::vector<std::string>();
+    parameters.push_back(std::to_string(startPointId));
+    parameters.push_back(std::to_string(endPointId));
+    
+    rows rows = DB::execute("SELECT id, startPointId, endPointId, distance, time FROM semgent WHERE (startPointId = ?1 AND endPointId = ?2) OR (endPointId = ?2 AND startPointId = ?1)");
+    sharedSegment result = sharedSegment();
+    if (rows.size() > 1) {
+        result = Segment::from(rows[1]);
+    }
+    return result;
+}
+
 
 double Segment::getDistance() {
     return this->distance;
