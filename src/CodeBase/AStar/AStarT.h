@@ -213,22 +213,16 @@ Le pointeur renvoyé par return pointe donc sur cible.
 
 HYPOTHESE :
 */
-template <class Sommet>
-PElement<Sommet> * chemin(Sommet * cible, PElement<Sommet> * & debut)
-{
-	if (!cible) 	// le chemin trouvé est vide (il n'y a donc pas de chemin)
-	{
+template <class Sommet> PElement<Sommet>* chemin(Sommet * cible, PElement<Sommet> * & debut) {
+    if (!cible) { // le chemin trouvé est vide (il n'y a donc pas de chemin)
 		debut = NULL; return NULL;
 	}
-	else
-	{
-		if (!pere(cible))		// le chemin trouvé contient un seul sommet. Cela signifie que départ = cible
-		{
+    else {
+        if (!pere(cible)) { // le chemin trouvŽ contient un seul sommet. Cela signifie que départ = cible
 			debut = new PElement<Sommet>(cible, NULL);
 			return debut;
 		}
-		else	// le chemin trouvé a au moins 2 sommets
-		{
+        else { // le chemin trouvé a au moins 2 sommets
 			PElement<Sommet> * d = chemin(pere(cible), debut);
 			d->s = new PElement<Sommet>(cible, NULL);
 			return d->s;

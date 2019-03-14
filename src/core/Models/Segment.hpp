@@ -10,22 +10,22 @@
 
 #include <stdio.h>
 #include <vector>
-#include "../DAO/Model.hpp"
 #include "Point.hpp"
 
-class Segment;
-typedef std::shared_ptr<Segment> sharedSegment;
-
-class Segment : public Model {
+class Segment {
 public:
     Segment(int id, int startPointId, int endPointId, int distance, int time);
     static sharedSegment from(row row);
+    static std::vector<sharedSegment> from(rows rows);
     static sharedSegment find(int startPointId, int endPointId);
     static void populateDB();
     
-    double getDistance();
+    int getDistance();
+    int getTime();
     sharedPoint getStartPoint();
     sharedPoint getEndPoint();
+    int getStartPointId();
+    int getEndPointId();
     void save();
 private:
     int id;

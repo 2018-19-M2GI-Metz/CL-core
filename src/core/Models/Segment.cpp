@@ -23,6 +23,18 @@ sharedSegment Segment::from(row row) {
     return std::make_shared<Segment>(segment);
 }
 
+std::vector<sharedSegment> Segment::from(rows rows) {
+    std::vector<sharedSegment> sharedSegments = std::vector<sharedSegment>();
+    bool firstRow = true;
+    for (row row : rows) {
+        if (!firstRow) {
+            sharedSegments.push_back(Segment::from(row));
+        }
+        firstRow = false;
+    }
+    return sharedSegments;
+}
+
 sharedSegment Segment::find(int startPointId, int endPointId) {
     std::vector<std::string> parameters = std::vector<std::string>();
     parameters.push_back(std::to_string(startPointId));
@@ -36,8 +48,12 @@ sharedSegment Segment::find(int startPointId, int endPointId) {
     return result;
 }
 
-double Segment::getDistance() {
+int Segment::getDistance() {
     return this->distance;
+}
+
+int Segment::getTime() {
+    return this->time;
 }
 
 sharedPoint Segment::getStartPoint() {
@@ -46,6 +62,30 @@ sharedPoint Segment::getStartPoint() {
 
 sharedPoint Segment::getEndPoint() {
     return Point::find(this->endPointId);
+}
+
+int Segment::getStartPointId() {
+    return this->startPointId;
+}
+
+int Segment::getEndPointId() {
+    return this->endPointId;
+}
+
+std::vector<sharedSegment> Point::getSegments() {
+    std::vector<std::string> parameters = std::vector<std::string>();
+    parameters.push_back(std::to_string(this->id));
+    rows rows = DB::execute("SELECT id, startPointId, endPointId, distance, time FROM segment WHERE startPointId = ?1 OR endPointId = ?1", parameters);
+    return Segment::from(rows);
+}
+
+std::vector<sharedPoint> Point::getNextPoints() {
+    std::vector<sharedPoint> points = std::vector<sharedPoint>();
+    for (sharedSegment segment : this->getSegments()) {
+        sharedPoint point = (segment->getStartPointId() == this->getId()) ? segment->getEndPoint() : segment->getStartPoint();
+        points.push_back(point);
+    }
+    return points;
 }
 
 // ONLY FOR INSERT AT THIS TIME

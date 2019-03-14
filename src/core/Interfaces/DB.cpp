@@ -20,8 +20,6 @@ rows DB::execute(std::string query, std::vector<std::string> binds) {
         const char *pzTest;
         bool firstRow = true;
         
-        std::cout << std::endl << query << std::endl;
-        
         // Prepare the statement
         sqlite3_stmt* context = nullptr;
         int error = sqlite3_prepare_v2(DB::instance, query.c_str(), int(strlen(query.c_str())), &context, &pzTest);
@@ -116,8 +114,8 @@ void DB::loadInstance() {
 }
 
 void DB::load() {
-    std::cout << "Development mode enabled, database deleted before loading.\n";
-    remove("database.db");
+    //std::cout << "Development mode enabled, database deleted before loading.\n";
+    //remove("database.db");
     
     DB::loadInstance();
     

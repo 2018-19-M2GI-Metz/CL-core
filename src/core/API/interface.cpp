@@ -20,15 +20,16 @@ std::vector<sharedPoint> searchPlace(std::string naturalQuery) {
     return Point::from(rows);
 }
 
-std::shared_ptr<Path> searchFastest(long startPointId, long endPointId) {
-    Path p = Path(4, true, false, 1000, 1300);
-    return std::make_shared<Path>(p);
+sharedPath searchFastest(int startPointId, int endPointId) {
+    sharedPoint start = Point::find(startPointId);
+    sharedPoint end = Point::find(endPointId);
+    return Process::AStar(start, end);
 }
 
-std::shared_ptr<Path> searchShortest(long startPointId, long endPointId) {
-    Path p = Path(4, true, false, 1000, 1300);
-    return std::make_shared<Path>(p);
-    
+sharedPath searchShortest(int startPointId, int endPointId) {
+    sharedPoint start = Point::find(startPointId);
+    sharedPoint end = Point::find(endPointId);
+    return Process::AStar(start, end);
 }
 
 sharedPoint searchNearestPlace(double latitude, double longitude) {
