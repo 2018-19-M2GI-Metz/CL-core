@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
     // bindable properties are automaticaly converted to int when necessary
     // bindable properties are optionnals
     
-    cout << std::endl;
+    cout << std::endl << std::endl << "Showing one point :" << std::endl;
     rows rows = DB::execute("SELECT * FROM point WHERE id = ?1", std::vector<std::string>({"2"}));
     for(row row : rows) {
         for(std::string value : row) {
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
     }
     cout << std::endl;
     
-    cout << std::endl;
+    cout << std::endl << "Showing all segments :" << std::endl;
     rows = DB::execute("SELECT * FROM segment");
     for(row row : rows) {
         for(std::string value : row) {

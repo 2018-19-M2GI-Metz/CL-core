@@ -55,44 +55,49 @@ void Segment::save() {
     parameters.push_back(std::to_string(this->endPointId));
     parameters.push_back(std::to_string(this->distance));
     parameters.push_back(std::to_string(this->time));
-    DB::execute("INSERT INTO segment (startPointId, endPointId, distance, time) VALUES (?2, ?3, ?4, ?5)", parameters);
+    DB::execute("INSERT INTO segment (startPointId, endPointId, distance, time) VALUES (?1, ?2, ?3, ?4)", parameters);
 }
 
 void Segment::populateDB() {
+    int maxDistance = 20000;
+    int maxConnexion = 3;
     std::vector<sharedPoint> points = Point::all();
     int pointCount = int(points.size());
     int startPointIndex = 0;
     int endPointIndex = 1;
-    int segmentId = 0;
+    int segmentCount = 0;
     int connexionCountOfPoint = 0;
     int currentPercent = 0;
     sharedPoint startPoint = points[startPointIndex];
     sharedPoint endPoint = points[endPointIndex];
+    
+    std::cout << std::endl << "Populating database with segments.. [maxDistance = " << maxDistance << "m, maxConnexion = " << maxConnexion << "]" << std::endl << "0%";
     
     while (startPointIndex != pointCount - 2) {
         
         // Test
         
         int distance = int(startPoint->distanceFrom(*endPoint));
-        if (distance < 5) {
+        if (distance < maxDistance) {
             sharedSegment segment = std::make_shared<Segment>(Segment(segmentId, startPoint->getId(), endPoint->getId(), distance, distance));
             segment->save();
-            segmentId += 1;
+            segmentCount += 1;
             connexionCountOfPoint += 1;
         }
         
         // Increment
         
-        if (endPointIndex == pointCount - 1 || connexionCountOfPoint == 3) {
+        if (endPointIndex == pointCount - 1 || connexionCountOfPoint >= maxConnexion) {
             startPointIndex += 1;
             endPointIndex = startPointIndex + 1;
             startPoint = points[startPointIndex];
             endPoint = points[endPointIndex];
+            connexionCountOfPoint = 0;
             
             int percent = int(ceil(100 * ((double)startPointIndex / (double)pointCount)));
             if (percent % 5 == 0 && percent != currentPercent) {
                 currentPercent = percent;
-                std::cout << "\r" << percent << "%";
+                std::cout << " " << percent << "%";
             }
         }
         else {
@@ -101,6 +106,6 @@ void Segment::populateDB() {
         }
     }
     
-    std::cout << std::endl << "created " << segmentId << " routes";
+    std::cout << std::endl << std::endl << "created " << segmentCount << " routes";
 }
 
