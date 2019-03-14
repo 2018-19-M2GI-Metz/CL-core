@@ -10,6 +10,7 @@
 #include <cstring>
 
 sqlite3* DB::instance;
+bool DB::isNewDatabase = true;
 
 rows DB::execute(std::string query, std::vector<std::string> binds) {
     rows result = rows();
@@ -102,9 +103,12 @@ rows DB::execute(std::string query, std::vector<std::string> binds) {
 
 void DB::loadInstance() {
     if (!DB::instance) {
-        std::cout << "Development mode enabled, database deleted before loading.\n";
-        remove("database.db");
-        // (access("database.db", F_OK) != -1)   => return true if exists, need unistd.h
+        //std::cout << "Development mode enabled, database deleted before loading.\n";
+        //remove("database.db");
+        
+        if (access("database.db", F_OK) != -1) {
+            DB::isNewDatabase = false;
+        }
         if (sqlite3_open("database.db", &DB::instance)) { // sql3_open return true if error
             instance = nullptr;
             fprintf(stderr, "Error opening database: %s\n", sqlite3_errmsg(DB::instance));
@@ -113,31 +117,35 @@ void DB::loadInstance() {
 }
 
 void DB::load() {
-    // SCHEMA
-    std::ifstream ifs = std::ifstream("rsc/schema.sql");
-    std::string query((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+    DB::loadInstance();
     
-    std::vector<std::string> queries;
-    while (query.size()) {
-        int index = int(query.find(";"));
-        if(index != std::string::npos){
-            queries.push_back(query.substr(0, index));
-            query = query.substr(index + 1);
+    if (DB::isNewDatabase) {
+        // SCHEMA
+        std::ifstream ifs = std::ifstream("rsc/schema.sql");
+        std::string query((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        
+        std::vector<std::string> queries;
+        while (query.size()) {
+            int index = int(query.find(";"));
+            if(index != std::string::npos){
+                queries.push_back(query.substr(0, index));
+                query = query.substr(index + 1);
+            }
+            else{
+                queries.push_back(query);
+                query = "";
+            }
         }
-        else{
-            queries.push_back(query);
-            query = "";
+        
+        for (std::string query : queries) {
+            DB::execute(query + ";");
         }
+        
+        // DATA
+        ifs = std::ifstream("rsc/data.sql");
+        query = std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
+        DB::execute(query);
     }
-    
-    for (std::string query : queries) {
-        DB::execute(query + ";");
-    }
-    
-    // DATA
-    ifs = std::ifstream("rsc/data.sql");
-    query = std::string((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-    DB::execute(query);
 }
 
 void DB::close() {

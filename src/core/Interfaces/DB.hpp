@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <unistd.h>
 #include <fstream>
 #include <vector>
 #include <string>
@@ -37,6 +38,7 @@ private:
     DB();
     static sqlite3* instance;
     static void loadInstance();
+    static bool isNewDatabase;
 };
 
 #endif /* BD_hpp */

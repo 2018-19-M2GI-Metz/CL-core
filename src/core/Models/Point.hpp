@@ -34,6 +34,7 @@ public:
     double getLatitude();
     double getLongitude();
     double distanceFrom(Point point);
+    double distanceFrom(double latitude, double longitude);
 private:
     Point(int id, std::string name, std::string address, double latitude, double longitude);
 

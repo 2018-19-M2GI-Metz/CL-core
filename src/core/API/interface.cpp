@@ -13,7 +13,7 @@
 
 #include "interface.hpp"
 
-std::vector<std::shared_ptr<Point>> searchPlace(std::string naturalQuery) {
+std::vector<sharedPoint> searchPlace(std::string naturalQuery) {
     std::shared_ptr<Point> p1 = Point::find(1);
     std::shared_ptr<Point> p2 = Point::find(2);
     std::vector<std::shared_ptr<Point>> vector = std::vector<std::shared_ptr<Point>>();
@@ -33,9 +33,17 @@ std::shared_ptr<Path> searchShortest(long startPointId, long endPointId) {
     
 }
 
-std::shared_ptr<Path> searchNearestPlace(double latitude, double longitude) {
-    Path p = Path(4, true, false, 1000, 1300);
-    return std::make_shared<Path>(p);
+sharedPoint searchNearestPlace(double latitude, double longitude) {
+    sharedPoint nearestPoint;
+    double minimalDistance = -1;
+    for (sharedPoint point : Point::all()) {
+        double distance = point->distanceFrom(latitude, longitude);
+        if (distance < minimalDistance || minimalDistance == -1) {
+            nearestPoint = point;
+            minimalDistance = distance;
+        }
+    }
+    return nearestPoint;
 }
 
 

@@ -17,8 +17,8 @@
 // interface files define entry points of the library
 // --------------------------------------------------
 
-std::vector<std::shared_ptr<Point>> searchPlace(std::string naturalQuery);
+std::vector<sharedPoint> searchPlace(std::string naturalQuery);
 std::shared_ptr<Path> searchFastest(long startPointId, long endPointId);
 std::shared_ptr<Path> searchShortest(long startPointId, long endPointId);
-std::shared_ptr<Path> searchNearestPlace(double latitude, double longitude);
+sharedPoint searchNearestPlace(double latitude, double longitude);
 

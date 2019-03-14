@@ -83,11 +83,15 @@ double Point::getLongitude() {
 }
 
 double Point::distanceFrom(Point point) {
+    return Point::distanceFrom(point.latitude, point.longitude);
+}
+
+double Point::distanceFrom(double latitude, double longitude) {
     double earthRadius = 6378000;
     double lat_a = (PI * this->latitude) / 180;
     double lon_a = (PI * this->longitude) / 180;
-    double lat_b = (PI * point.latitude) / 180;
-    double lon_b = (PI * point.longitude) / 180;
+    double lat_b = (PI * latitude) / 180;
+    double lon_b = (PI * longitude) / 180;
     double distance = earthRadius * (PI/2 - asin(sin(lat_b) * sin(lat_a) + cos(lon_b - lon_a) * cos(lat_b) * cos(lat_a)));
     return distance;
 }
