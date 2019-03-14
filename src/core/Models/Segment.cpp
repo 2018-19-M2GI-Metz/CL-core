@@ -26,10 +26,10 @@ double Segment::getDistance() {
     return this->distance;
 }
 
-Point* Segment::startPoint() {
-    return nullptr;
+sharedPoint Segment::getStartPoint() {
+    return Point::find(this->startPointId);
 }
 
-Point* Segment::endPoint() {
-    return nullptr;
+sharedPoint Segment::getEndPoint() {
+    return Point::find(this->endPointId);
 }

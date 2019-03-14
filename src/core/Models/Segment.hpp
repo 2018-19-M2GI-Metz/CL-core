@@ -19,8 +19,8 @@ public:
     static Segment from(row row);
     
     double getDistance();
-    Point* startPoint();
-    Point* endPoint();
+    sharedPoint getStartPoint();
+    sharedPoint getEndPoint();
 private:
     int id;
     int startPointId;
