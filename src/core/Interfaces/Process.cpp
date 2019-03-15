@@ -7,6 +7,7 @@
 //
 
 #include "Process.hpp"
+#include <algorithm>
 
 sharedPath Process::AStar(sharedPoint start, sharedPoint end) {
     
