@@ -11,10 +11,12 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <unistd.h>
 #include <fstream>
 #include <vector>
 #include <string>
 #include <sqlite3.h>
+#include "../SQL/SQLseeder.hpp"
 
 typedef std::vector<std::vector<std::string>> rows;
 typedef std::vector<std::string> row;
@@ -28,12 +30,16 @@ public:
     // load the full database
     static void load();
     
+    // create arbitrary datas for segments
+    static void populate();
+    
     // close the database
     static void close();
 private:
     DB();
     static sqlite3* instance;
     static void loadInstance();
+    static bool isNewDatabase;
 };
 
 #endif /* BD_hpp */

@@ -11,14 +11,15 @@
 #include <stdio.h>
 #include <vector>
 #include "../Models/Path.hpp"
+#include "../Interfaces/Process.hpp"
 #include <memory>
 
 // --------------------------------------------------
 // interface files define entry points of the library
 // --------------------------------------------------
 
-std::vector<std::shared_ptr<Point>> searchPlace(std::string naturalQuery);
-std::shared_ptr<Path> searchFastest(long startPointId, long endPointId);
-std::shared_ptr<Path> searchShortest(long startPointId, long endPointId);
-std::shared_ptr<Path> searchNearestPlace(double latitude, double longitude);
+std::vector<sharedPoint> searchPlace(std::string naturalQuery);
+sharedPath searchFastest(int startPointId, int endPointId);
+sharedPath searchShortest(int startPointId, int endPointId);
+sharedPoint searchNearestPlace(double latitude, double longitude);
 

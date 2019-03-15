@@ -9,25 +9,28 @@
 #pragma once
 
 #include <stdio.h>
-#include "PathPoint.hpp"
+#include "Segment.hpp"
 
-class Path : public Model {
+class Path;
+typedef std::shared_ptr<Path> sharedPath;
+
+class Path {
 public:
-    Path(int id, bool isShortest, bool isFastest, int distance, int time);
-    static Path from(row row);
-    
-    double getLenght();
-    long segmentCount();
+    Path(bool isShortest, bool isFastest);
+    int getDistance();
+    int getTime();
+    int segmentCount();
+    int pointCount();
     bool isShortest();
     bool isFastest();
     std::vector<sharedSegment> getSegments();
-    std::vector<sharedPoint> getPoints(); // referenced points
-    std::vector<PathPoint> getPathPoints(); // indexed points
+    std::vector<sharedPoint> getPoints();
+    
+    void addPoint(sharedPoint point);
 private:
-    int id;
     bool shortest;
     bool fastest;
     int distance;
     int time;
-    std::string tableName = "path";
+    std::vector<sharedPoint> points;
 };
